@@ -1,7 +1,7 @@
 package com.tekihub.daboo.di;
 
 import android.content.Context;
-import com.tekihub.daboo.MainApplication;
+import com.tekihub.daboo.AndroidApplication;
 import com.tekihub.daboo.UIThread;
 import com.tekihub.daboo.data.repository.RateDataRepository;
 import com.tekihub.daboo.data.repository.TransactionDataRepository;
@@ -15,9 +15,9 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module public class ApplicationModule {
-  private final MainApplication application;
+  private final AndroidApplication application;
 
-  public ApplicationModule(MainApplication application) {
+  public ApplicationModule(AndroidApplication application) {
     this.application = application;
   }
 

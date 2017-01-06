@@ -5,7 +5,7 @@ import com.tekihub.daboo.di.ApplicationComponent;
 import com.tekihub.daboo.di.ApplicationModule;
 import com.tekihub.daboo.di.DaggerApplicationComponent;
 
-public class MainApplication extends Application {
+public class AndroidApplication extends Application {
   private ApplicationComponent applicationComponent;
 
   @Override public void onCreate() {
