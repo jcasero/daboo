@@ -2,7 +2,7 @@ package com.tekihub.daboo.domain.interactor;
 
 import com.tekihub.daboo.domain.ConversionParams;
 import com.tekihub.daboo.domain.CurrencyConverter;
-import com.tekihub.daboo.domain.Rate;
+import com.tekihub.daboo.domain.entity.Rate;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import io.reactivex.Observable;

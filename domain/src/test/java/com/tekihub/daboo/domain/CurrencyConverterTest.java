@@ -1,15 +1,16 @@
 package com.tekihub.daboo.domain;
 
+import com.tekihub.daboo.domain.entity.Rate;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.runners.JUnit4;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class) public class CurrencyConverterTest {
+@RunWith(JUnit4.class) public class CurrencyConverterTest {
   private List<Rate> rates;
   private CurrencyConverter currencyConverter = new CurrencyConverter();
 

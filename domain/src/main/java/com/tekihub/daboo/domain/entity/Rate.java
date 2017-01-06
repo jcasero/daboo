@@ -1,4 +1,4 @@
-package com.tekihub.daboo.domain;
+package com.tekihub.daboo.domain.entity;
 
 public class Rate {
   private final String from;

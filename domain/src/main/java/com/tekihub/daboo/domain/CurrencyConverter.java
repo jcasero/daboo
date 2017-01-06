@@ -1,5 +1,6 @@
 package com.tekihub.daboo.domain;
 
+import com.tekihub.daboo.domain.entity.Rate;
 import java.util.List;
 
 public class CurrencyConverter {

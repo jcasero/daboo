@@ -4,10 +4,12 @@ import android.content.Context;
 import com.tekihub.daboo.MainApplication;
 import com.tekihub.daboo.UIThread;
 import com.tekihub.daboo.data.repository.RateDataRepository;
+import com.tekihub.daboo.data.repository.TransactionDataRepository;
 import com.tekihub.daboo.data.repository.executor.JobExecutor;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import com.tekihub.daboo.domain.repository.RateRepository;
+import com.tekihub.daboo.domain.repository.TransactionRepository;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
@@ -33,5 +35,10 @@ import javax.inject.Singleton;
 
   @Provides @Singleton RateRepository provideUserRepository(RateDataRepository rateDataRepository) {
     return rateDataRepository;
+  }
+
+  @Provides @Singleton TransactionRepository provideTransactionRepository(
+      TransactionDataRepository transactionDataRepository) {
+    return transactionDataRepository;
   }
 }

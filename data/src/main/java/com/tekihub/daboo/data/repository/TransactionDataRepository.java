@@ -5,8 +5,8 @@ import android.content.res.AssetManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.tekihub.daboo.domain.entity.Rate;
-import com.tekihub.daboo.domain.repository.RateRepository;
+import com.tekihub.daboo.domain.entity.Transaction;
+import com.tekihub.daboo.domain.repository.TransactionRepository;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import java.io.InputStream;
@@ -15,23 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton public class RateDataRepository implements RateRepository {
-  private final String RATES_JSON = "rates.json";
-
+public class TransactionDataRepository implements TransactionRepository {
+  private static final String TRANSACTION_JSON = "transactions.json";
   private final Context context;
 
-  @Inject RateDataRepository(Context context) {
+  @Inject TransactionDataRepository(Context context) {
     this.context = context;
   }
 
-  @Override public Observable<List<Rate>> rates() {
-    return Observable.defer(new Callable<ObservableSource<? extends List<Rate>>>() {
-
-      @Override public ObservableSource<? extends List<Rate>> call() throws Exception {
+  @Override public Observable<List<Transaction>> transactions() {
+    return Observable.defer(new Callable<ObservableSource<List<Transaction>>>() {
+      @Override public ObservableSource<List<Transaction>> call() throws Exception {
         AssetManager assetManager = context.getAssets();
-        InputStream is = assetManager.open(RATES_JSON);
+        InputStream is = assetManager.open(TRANSACTION_JSON);
         int size = is.available();
         byte[] buffer = new byte[size];
         is.read(buffer);
@@ -39,10 +36,10 @@ import javax.inject.Singleton;
         String bufferString = new String(buffer);
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
-        Type listType = new TypeToken<ArrayList<Rate>>() {
+        Type listType = new TypeToken<ArrayList<Transaction>>() {
         }.getType();
-        List<Rate> rates = gson.fromJson(bufferString, listType);
-        return Observable.fromArray(rates);
+        List<Transaction> transactions = gson.fromJson(bufferString, listType);
+        return Observable.fromArray(transactions);
       }
     });
   }
