@@ -12,6 +12,7 @@ ext {
   def javaxAnnotationVersion = '1.0'
   def javaxInjectVersion = '1'
   def gsonVersion = '2.8.0'
+  def junitVersion = '4.12'
 
   def libs = [supportLib        : [group: 'com.android.support', name: 'appcompat-v7', version: supportLibVersion],
               dagger            : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
@@ -21,7 +22,8 @@ ext {
               javaxAnnotation   : [group: 'javax.annotation', name: 'jsr250-api', version: javaxAnnotationVersion],
               javaxInject       : [group: 'javax.inject', name: 'javax.inject', version: javaxInjectVersion],
               gson              : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
-              androidAnnotations: [group: 'com.android.support', name: 'support-annotations', version: supportLibVersion],]
+              androidAnnotations: [group: 'com.android.support', name: 'support-annotations', version: supportLibVersion],
+              junit             : [group: 'junit', name: 'junit', version: junitVersion],]
 
   def modules = [app   : ':app',
                  data  : ':data',
@@ -37,7 +39,8 @@ ext {
 
   domainDependencies = [[configuration: "compile", dependency: libs.rxJava],
                         [configuration: "compile", dependency: libs.javaxInject],
-                        [configuration: "provided", dependency: libs.javaxAnnotation],]
+                        [configuration: "provided", dependency: libs.javaxAnnotation],
+                        [configuration: "testCompile", dependency: libs.junit],]
 
   dataDependencies = [[configuration: "compile", dependency: libs.gson],
                       [configuration: "compile", dependency: libs.androidAnnotations],
