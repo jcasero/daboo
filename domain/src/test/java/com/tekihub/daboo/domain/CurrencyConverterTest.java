@@ -16,7 +16,7 @@
 package com.tekihub.daboo.domain;
 
 import com.tekihub.daboo.domain.entity.Rate;
-import com.tekihub.daboo.domain.util.CurrencyConverter;
+import com.tekihub.daboo.domain.utils.CurrencyConverter;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;

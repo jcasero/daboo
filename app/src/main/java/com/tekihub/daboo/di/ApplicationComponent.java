@@ -16,7 +16,7 @@
 package com.tekihub.daboo.di;
 
 import android.content.Context;
-import com.tekihub.daboo.domain.util.CurrencyConverter;
+import com.tekihub.daboo.domain.utils.CurrencyConverter;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import com.tekihub.daboo.domain.repository.RateRepository;

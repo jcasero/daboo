@@ -16,7 +16,7 @@
 package com.tekihub.daboo.domain.interactor;
 
 import com.tekihub.daboo.domain.entity.ConversionParams;
-import com.tekihub.daboo.domain.util.CurrencyConverter;
+import com.tekihub.daboo.domain.utils.CurrencyConverter;
 import com.tekihub.daboo.domain.entity.Conversion;
 import com.tekihub.daboo.domain.entity.Currency;
 import com.tekihub.daboo.domain.entity.Rate;

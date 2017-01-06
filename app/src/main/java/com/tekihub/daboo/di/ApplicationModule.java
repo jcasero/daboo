@@ -21,7 +21,7 @@ import com.tekihub.daboo.UIThread;
 import com.tekihub.daboo.data.repository.RateDataRepository;
 import com.tekihub.daboo.data.repository.TransactionDataRepository;
 import com.tekihub.daboo.data.repository.executor.JobExecutor;
-import com.tekihub.daboo.domain.util.CurrencyConverter;
+import com.tekihub.daboo.domain.utils.CurrencyConverter;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import com.tekihub.daboo.domain.repository.RateRepository;

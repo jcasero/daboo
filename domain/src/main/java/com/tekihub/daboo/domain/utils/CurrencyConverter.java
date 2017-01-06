@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tekihub.daboo.domain.util;
+package com.tekihub.daboo.domain.utils;
 
 import com.tekihub.daboo.domain.entity.Graph;
 import com.tekihub.daboo.domain.entity.Rate;
