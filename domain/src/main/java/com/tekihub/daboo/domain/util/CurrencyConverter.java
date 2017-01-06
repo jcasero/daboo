@@ -13,26 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tekihub.daboo.domain.interactor;
+package com.tekihub.daboo.domain.util;
 
+import com.tekihub.daboo.domain.entity.Graph;
 import com.tekihub.daboo.domain.entity.Rate;
-import com.tekihub.daboo.domain.executor.PostExecutionThread;
-import com.tekihub.daboo.domain.executor.ThreadExecutor;
-import com.tekihub.daboo.domain.repository.RateRepository;
-import io.reactivex.Observable;
 import java.util.List;
 import javax.inject.Inject;
 
-public class GetRates extends UseCase<List<Rate>, Void> {
-  private final RateRepository rateRepository;
+public class CurrencyConverter {
+  private Graph graph;
 
-  @Inject GetRates(RateRepository rateRepository, ThreadExecutor threadExecutor,
-      PostExecutionThread postExecutionThread) {
-    super(threadExecutor, postExecutionThread);
-    this.rateRepository = rateRepository;
+  @Inject public CurrencyConverter() {
   }
 
-  @Override Observable<List<Rate>> buildUseCaseObservable(Void aVoid) {
-    return rateRepository.rates();
+  public double convert(List<Rate> rates, double quantity, String from, String to) {
+    if (graph == null) {
+      graph = createGraphFromRates(rates);
+    }
+
+    double conversionRate = graph.calculate(from, to);
+    return conversionRate * quantity;
+  }
+
+  private Graph createGraphFromRates(List<Rate> rates) {
+    Graph graph = new Graph();
+    for (Rate rate : rates) {
+      graph.addEdge(rate.getFrom(), rate.getTo(), rate.getRate());
+    }
+    return graph;
   }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Fernando Cejas Open Source Project
+ * Copyright (C) 2017 Jose Casero
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tekihub.daboo.di;
+package com.tekihub.daboo.domain.entity;
 
-import android.app.Activity;
-import dagger.Component;
+class Edge {
+  private String to;
+  private double value;
 
-/**
- * A base component upon which fragment's components may depend.
- * Activity-level components should extend this component.
- *
- * Subtypes of ActivityComponent should be decorated with annotation:
- * {@link PerActivity}
- */
-@PerActivity @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
-interface ActivityComponent {
-  //Exposed to sub-graphs.
-  Activity activity();
+  Edge(String to, double value) {
+    this.to = to;
+    this.value = value;
+  }
+
+  public String getTo() {
+    return to;
+  }
+
+  public double getValue() {
+    return value;
+  }
 }

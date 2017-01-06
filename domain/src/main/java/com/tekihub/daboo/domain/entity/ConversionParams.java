@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2015 Fernando Cejas Open Source Project
+ * Copyright (C) 2017 Jose Casero
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tekihub.daboo.domain.interactor;
+package com.tekihub.daboo.domain.entity;
 
-import io.reactivex.observers.DisposableObserver;
+import java.util.List;
 
-/**
- * Default {@link DisposableObserver} base class to be used whenever you want default error handling.
- */
-public class DefaultObserver<T> extends DisposableObserver<T> {
-  @Override public void onNext(T t) {
-    // no-op by default.
+public class ConversionParams {
+  private final List<Conversion> conversions;
+  private final String to;
+
+  public ConversionParams(List<Conversion> conversions, String to) {
+    this.conversions = conversions;
+    this.to = to;
   }
 
-  @Override public void onComplete() {
-    // no-op by default.
+  public List<Conversion> getConversions() {
+    return conversions;
   }
 
-  @Override public void onError(Throwable exception) {
-    // no-op by default.
+  public String getTo() {
+    return to;
   }
 }
