@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion rootProject.compileSdkVersion
+  buildToolsVersion rootProject.buildToolsVersion
+  defaultConfig {
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
+    versionCode 1
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+}
+
+dependencies {
+  rootProject.dataDependencies.each {
+    add(it.configuration, it.dependency)
+  }
+}
