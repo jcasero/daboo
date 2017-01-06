@@ -9,31 +9,38 @@ ext {
   def daggerVersion = '2.8'
   def rxJavaVersion = '2.0.2'
   def rxAndroidVersion = '2.0.1'
+  def butterKnifeVersion = '8.4.0'
   def javaxAnnotationVersion = '1.0'
   def javaxInjectVersion = '1'
   def gsonVersion = '2.8.0'
   def junitVersion = '4.12'
 
-  def libs = [supportLib        : [group: 'com.android.support', name: 'appcompat-v7', version: supportLibVersion],
-              dagger            : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
-              daggerCompiler    : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
-              rxJava            : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
-              rxAndroid         : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
-              javaxAnnotation   : [group: 'javax.annotation', name: 'jsr250-api', version: javaxAnnotationVersion],
-              javaxInject       : [group: 'javax.inject', name: 'javax.inject', version: javaxInjectVersion],
-              gson              : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
-              androidAnnotations: [group: 'com.android.support', name: 'support-annotations', version: supportLibVersion],
-              junit             : [group: 'junit', name: 'junit', version: junitVersion],]
+  def libs = [supportLib         : [group: 'com.android.support', name: 'appcompat-v7', version: supportLibVersion],
+              recyclerView       : [group: 'com.android.support', name: 'recyclerview-v7', version: supportLibVersion],
+              dagger             : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
+              daggerCompiler     : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
+              rxJava             : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
+              rxAndroid          : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
+              butterKnife        : [group: 'com.jakewharton', name: 'butterknife', version: butterKnifeVersion],
+              butterKnifeCompiler: [group: 'com.jakewharton', name: 'butterknife-compiler', version: butterKnifeVersion],
+              javaxAnnotation    : [group: 'javax.annotation', name: 'jsr250-api', version: javaxAnnotationVersion],
+              javaxInject        : [group: 'javax.inject', name: 'javax.inject', version: javaxInjectVersion],
+              gson               : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+              androidAnnotations : [group: 'com.android.support', name: 'support-annotations', version: supportLibVersion],
+              junit              : [group: 'junit', name: 'junit', version: junitVersion],]
 
   def modules = [app   : ':app',
                  data  : ':data',
                  domain: ':domain']
 
   appDependencies = [[configuration: "compile", dependency: libs.supportLib],
+                     [configuration: "compile", dependency: libs.recyclerView],
                      [configuration: "compile", dependency: libs.dagger],
                      [configuration: "apt", dependency: libs.daggerCompiler],
-                     [configuration: "compile", dependency: libs.rxAndroid],
                      [configuration: "compile", dependency: libs.rxJava],
+                     [configuration: "compile", dependency: libs.rxAndroid],
+                     [configuration: "compile", dependency: libs.butterKnife],
+                     [configuration: "apt", dependency: libs.butterKnifeCompiler],
                      [configuration: "compile", dependency: project(modules.domain)],
                      [configuration: "compile", dependency: project(modules.data)],]
 

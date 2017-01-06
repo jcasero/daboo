@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 public class GetProducts extends UseCase<List<Product>, Void> {
+  public static final String NAME = "GetProducts";
   private final GetTransactions getTransactions;
   private HashMap<String, Product> products = new HashMap<>();
 

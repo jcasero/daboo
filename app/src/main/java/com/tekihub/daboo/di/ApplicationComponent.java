@@ -5,6 +5,7 @@ import com.tekihub.daboo.MainActivity;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import com.tekihub.daboo.domain.repository.RateRepository;
+import com.tekihub.daboo.domain.repository.TransactionRepository;
 import dagger.Component;
 import javax.inject.Singleton;
 
@@ -18,4 +19,6 @@ import javax.inject.Singleton;
   PostExecutionThread postExecutionThread();
 
   RateRepository userRepository();
+
+  TransactionRepository transactionRepository();
 }
