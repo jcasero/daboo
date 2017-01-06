@@ -2,16 +2,19 @@ package com.tekihub.daboo.domain.interactor;
 
 import com.tekihub.daboo.domain.ConversionParams;
 import com.tekihub.daboo.domain.CurrencyConverter;
+import com.tekihub.daboo.domain.entity.Conversion;
+import com.tekihub.daboo.domain.entity.Currency;
 import com.tekihub.daboo.domain.entity.Rate;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
-public class GetConversion extends UseCase<Double, ConversionParams> {
+public class GetConversion extends UseCase<List<Conversion>, ConversionParams> {
   private final CurrencyConverter converter;
   private final GetRates getRates;
 
@@ -22,12 +25,21 @@ public class GetConversion extends UseCase<Double, ConversionParams> {
     this.getRates = getRates;
   }
 
-  @Override Observable<Double> buildUseCaseObservable(final ConversionParams conversionParams) {
-    return Observable.defer(new Callable<ObservableSource<? extends Double>>() {
-      @Override public ObservableSource<? extends Double> call() throws Exception {
+  @Override Observable<List<Conversion>> buildUseCaseObservable(final ConversionParams params) {
+    return Observable.defer(new Callable<ObservableSource<? extends List<Conversion>>>() {
+      @Override public ObservableSource<? extends List<Conversion>> call() throws Exception {
+        List<Conversion> converted = new ArrayList<>();
         List<Rate> rates = getRates.buildUseCaseObservable(null).blockingFirst();
-        return Observable.just(converter.convert(rates, conversionParams.getQuantity(), conversionParams.getFrom(),
-            conversionParams.getTo()));
+        List<Conversion> conversions = params.getConversions();
+        for (Conversion conversion : conversions) {
+          double value =
+              converter.convert(rates, conversion.getOriginal().getValue(), conversion.getOriginal().getCurrency(),
+                  params.getTo());
+          Conversion newConversion = new Conversion(conversion.getOriginal());
+          newConversion.setConverted(new Currency(params.getTo(), value));
+          converted.add(newConversion);
+        }
+        return Observable.just(converted);
       }
     });
   }

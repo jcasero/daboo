@@ -1,5 +1,6 @@
-package com.tekihub.daboo.products;
+package com.tekihub.daboo.products.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,21 +14,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tekihub.daboo.BaseFragment;
 import com.tekihub.daboo.R;
-import com.tekihub.daboo.domain.entity.Product;
+import com.tekihub.daboo.model.ProductModel;
+import com.tekihub.daboo.products.adapter.ProductItem;
+import com.tekihub.daboo.products.adapter.ProductsAdapter;
 import com.tekihub.daboo.products.di.DaggerProductsComponent;
-import com.tekihub.daboo.products.mapper.ProductsMapper;
+import com.tekihub.daboo.products.presenter.ProductsPresenter;
+import com.tekihub.daboo.transactions.TransactionsActivity;
 import java.util.List;
 import javax.inject.Inject;
 
-public class ProductsFragment extends BaseFragment implements ProductsPresenter.View {
+public class ProductsFragment extends BaseFragment implements ProductsPresenter.View, ProductsAdapter.OnItemClicked {
   @BindView(R.id.rvProducts) RecyclerView rvProducts;
   @BindView(R.id.tvInfo) TextView tvInfo;
   @BindView(R.id.pbLoading) ProgressBar pbLoading;
 
   @Inject ProductsPresenter presenter;
 
-  private ProductsAdapter productsAdapter = new ProductsAdapter();
-  private ProductsMapper productsMapper = new ProductsMapper();
+  private ProductsAdapter productsAdapter = new ProductsAdapter(this);
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class ProductsFragment extends BaseFragment implements ProductsPresenter.
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.products_fragment, container);
+    View view = inflater.inflate(R.layout.products_fragment, container, false);
     ButterKnife.bind(this, view);
     initViews();
     presenter.fetchProducts();
@@ -50,9 +53,8 @@ public class ProductsFragment extends BaseFragment implements ProductsPresenter.
     tvInfo.setVisibility(View.VISIBLE);
   }
 
-  @Override public void showProducts(List<Product> products) {
-    List<AdapterItem> adapterItems = productsMapper.transformAll(products);
-    productsAdapter.setItems(adapterItems);
+  @Override public void showProducts(List<ProductItem> items) {
+    productsAdapter.setItems(items);
     tvInfo.setVisibility(View.GONE);
     pbLoading.setVisibility(View.GONE);
     rvProducts.setVisibility(View.VISIBLE);
@@ -62,6 +64,15 @@ public class ProductsFragment extends BaseFragment implements ProductsPresenter.
     tvInfo.setVisibility(View.GONE);
     rvProducts.setVisibility(View.GONE);
     pbLoading.setVisibility(View.VISIBLE);
+  }
+
+  @Override public void showProductDetail(ProductModel productModel) {
+    Intent intent = TransactionsActivity.getCallIntent(getContext(), productModel);
+    startActivity(intent);
+  }
+
+  @Override public void onItemClicked(int position) {
+    presenter.onItemClicked(position);
   }
 
   private void initViews() {

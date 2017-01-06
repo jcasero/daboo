@@ -15,9 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton public class RateDataRepository implements RateRepository {
+public class RateDataRepository implements RateRepository {
   private final String RATES_JSON = "rates.json";
 
   private final Context context;

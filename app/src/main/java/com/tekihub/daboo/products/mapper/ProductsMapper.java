@@ -1,21 +1,31 @@
 package com.tekihub.daboo.products.mapper;
 
+import android.content.Context;
+import com.tekihub.daboo.R;
 import com.tekihub.daboo.domain.entity.Product;
-import com.tekihub.daboo.products.AdapterItem;
+import com.tekihub.daboo.products.adapter.ProductItem;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 public class ProductsMapper {
+  private Context context;
 
-  public AdapterItem transform(Product product) {
-    return new AdapterItem(product.getSku(), String.valueOf(product.getTransactions().size()));
+  @Inject public ProductsMapper(Context context) {
+    this.context = context;
   }
 
-  public List<AdapterItem> transformAll(List<Product> products) {
-    List<AdapterItem> adapterItems = new ArrayList<>();
+  public ProductItem transform(Product product) {
+    int size = product.getTransactions().size();
+    return new ProductItem(product.getSku(),
+        context.getResources().getQuantityString(R.plurals.num_transactions, size, size));
+  }
+
+  public List<ProductItem> transformAll(List<Product> products) {
+    List<ProductItem> productItems = new ArrayList<>();
     for (Product product : products) {
-      adapterItems.add(transform(product));
+      productItems.add(transform(product));
     }
-    return adapterItems;
+    return productItems;
   }
 }

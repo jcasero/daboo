@@ -1,10 +1,10 @@
-package com.tekihub.daboo.products;
+package com.tekihub.daboo.products.adapter;
 
-public class AdapterItem {
+public class ProductItem {
   private String title;
   private String subtitle;
 
-  public AdapterItem(String title, String subtitle) {
+  public ProductItem(String title, String subtitle) {
     this.title = title;
     this.subtitle = subtitle;
   }

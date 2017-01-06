@@ -1,22 +1,19 @@
 package com.tekihub.daboo.domain;
 
+import com.tekihub.daboo.domain.entity.Conversion;
+import java.util.List;
+
 public class ConversionParams {
-  private final double quantity;
-  private final String from;
+  private final List<Conversion> conversions;
   private final String to;
 
-  public ConversionParams(double quantity, String from, String to) {
-    this.quantity = quantity;
-    this.from = from;
+  public ConversionParams(List<Conversion> conversions, String to) {
+    this.conversions = conversions;
     this.to = to;
   }
 
-  public double getQuantity() {
-    return quantity;
-  }
-
-  public String getFrom() {
-    return from;
+  public List<Conversion> getConversions() {
+    return conversions;
   }
 
   public String getTo() {

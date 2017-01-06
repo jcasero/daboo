@@ -6,6 +6,7 @@ import com.tekihub.daboo.UIThread;
 import com.tekihub.daboo.data.repository.RateDataRepository;
 import com.tekihub.daboo.data.repository.TransactionDataRepository;
 import com.tekihub.daboo.data.repository.executor.JobExecutor;
+import com.tekihub.daboo.domain.CurrencyConverter;
 import com.tekihub.daboo.domain.executor.PostExecutionThread;
 import com.tekihub.daboo.domain.executor.ThreadExecutor;
 import com.tekihub.daboo.domain.repository.RateRepository;
@@ -33,12 +34,16 @@ import javax.inject.Singleton;
     return uiThread;
   }
 
-  @Provides @Singleton RateRepository provideUserRepository(RateDataRepository rateDataRepository) {
+  @Provides @Singleton RateRepository provideRateRepository(RateDataRepository rateDataRepository) {
     return rateDataRepository;
   }
 
   @Provides @Singleton TransactionRepository provideTransactionRepository(
       TransactionDataRepository transactionDataRepository) {
     return transactionDataRepository;
+  }
+
+  @Provides @Singleton CurrencyConverter provideCurrencyConverter() {
+    return new CurrencyConverter();
   }
 }

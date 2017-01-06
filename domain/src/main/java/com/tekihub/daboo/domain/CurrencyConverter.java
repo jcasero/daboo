@@ -2,11 +2,19 @@ package com.tekihub.daboo.domain;
 
 import com.tekihub.daboo.domain.entity.Rate;
 import java.util.List;
+import javax.inject.Inject;
 
 public class CurrencyConverter {
+  private Graph graph;
+
+  @Inject public CurrencyConverter() {
+  }
 
   public double convert(List<Rate> rates, double quantity, String from, String to) {
-    Graph graph = createGraphFromRates(rates);
+    if (graph == null) {
+      graph = createGraphFromRates(rates);
+    }
+
     double conversionRate = graph.calculate(from, to);
     return conversionRate * quantity;
   }

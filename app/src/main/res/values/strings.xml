@@ -1,4 +1,8 @@
 <resources>
   <string name="app_name">Daboo</string>
   <string name="products">Products</string>
+
+  <string name="transactions_for">Transactions for %1$s</string>
+  <string name="no_product_available">No products available</string>
+  <string name="no_transactions_available">No transactions available</string>
 </resources>

@@ -10,7 +10,7 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity
-        android:name="com.tekihub.daboo.MainActivity"
+        android:name="com.tekihub.daboo.products.ProductsActivity"
         android:label="@string/products">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -18,6 +18,8 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <activity android:name=".transactions.TransactionsActivity"/>
   </application>
 
 </manifest>

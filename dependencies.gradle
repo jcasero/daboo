@@ -6,6 +6,8 @@ ext {
   targetSdkVersion = 25
 
   def supportLibVersion = '25.1.0'
+  def autoValueVersion = '1.4-rc2'
+  def autoValueParcelVersion = '0.2.5'
   def daggerVersion = '2.8'
   def rxJavaVersion = '2.0.2'
   def rxAndroidVersion = '2.0.1'
@@ -17,6 +19,8 @@ ext {
 
   def libs = [supportLib         : [group: 'com.android.support', name: 'appcompat-v7', version: supportLibVersion],
               recyclerView       : [group: 'com.android.support', name: 'recyclerview-v7', version: supportLibVersion],
+              autoValue          : [group: 'com.google.auto.value', name: 'auto-value', version: autoValueVersion],
+              autoValueParcel    : [group: 'com.ryanharter.auto.value', name: 'auto-value-parcel', version: autoValueParcelVersion],
               dagger             : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
               daggerCompiler     : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
               rxJava             : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
@@ -35,6 +39,9 @@ ext {
 
   appDependencies = [[configuration: "compile", dependency: libs.supportLib],
                      [configuration: "compile", dependency: libs.recyclerView],
+                     [configuration: "compile", dependency: libs.autoValue],
+                     [configuration: "apt", dependency: libs.autoValue],
+                     [configuration: "apt", dependency: libs.autoValueParcel],
                      [configuration: "compile", dependency: libs.dagger],
                      [configuration: "apt", dependency: libs.daggerCompiler],
                      [configuration: "compile", dependency: libs.rxJava],

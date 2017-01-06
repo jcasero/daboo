@@ -7,7 +7,7 @@
     >
 
   <fragment
-      android:name="com.tekihub.daboo.products.ProductsFragment"
+      android:name="com.tekihub.daboo.products.fragment.ProductsFragment"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       />
